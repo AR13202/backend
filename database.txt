@@ -1,0 +1,34 @@
+database name: wave
+CREATE TABLE users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  first_name VARCHAR(50) NOT NULL,
+  last_name VARCHAR(50) NOT NULL,
+  email VARCHAR(100) NOT NULL UNIQUE,
+  username VARCHAR(50) NOT NULL UNIQUE,
+  password_hash VARCHAR(255) NOT NULL,
+  date_of_birth DATE NOT NULL,
+  gender ENUM('male', 'female', 'other') NOT NULL,
+  city VARCHAR(50) NOT NULL,
+  profile_image_address VARCHAR(255) NOT NULL,
+  mobile VARCHAR(20) NOT NULL
+);
+CREATE TABLE meetings (
+  meeting_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  meeting_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  user_id INT,
+  name VARCHAR(255)
+);
+CREATE TABLE meetings (
+  meeting_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  meeting_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  user_id INT,
+  name VARCHAR(255),
+  FOREIGN KEY (user_id) REFERENCES users(id)
+);
+CREATE TABLE todos (
+  todo_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  todo VARCHAR(255) NOT NULL,
+  user_id INT,
+  FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
